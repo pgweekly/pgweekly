@@ -7,7 +7,7 @@ title = "Postgres Weekly, A Hacker’s Digest"
 
 [output.html]
 no-section-label = true
-git-repository-url = "https://github.com/pgweekly/pgweekly"
+git-repository-url = "https://github.com/pgweekly/pgweekly.github.io"
 
 [output.html.fold]
 enable = true     # whether or not to enable section folding
