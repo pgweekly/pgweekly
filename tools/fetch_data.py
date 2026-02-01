@@ -158,18 +158,63 @@ def sanitize_thread_id(thread_id: str) -> str:
     return thread_id
 
 
+def download_missing_attachments(thread_dir: Path) -> list[str]:
+    """Read thread.html in thread_dir, extract attachment URLs, download any not already in attachments/."""
+    html_path = thread_dir / "thread.html"
+    if not html_path.exists():
+        print(f"  ✗ No thread.html in {thread_dir}")
+        return []
+    html = html_path.read_text(encoding="utf-8", errors="ignore")
+    attachments = extract_attachments(html)
+    attachments_dir = thread_dir / "attachments"
+    attachments_dir.mkdir(exist_ok=True)
+    existing = set(attachments_dir.iterdir()) if attachments_dir.exists() else set()
+    existing_names = {p.name for p in existing}
+    downloaded = []
+    for i, url in enumerate(attachments, 1):
+        filename = url.split("/")[-1].split("?")[0]
+        if not filename:
+            continue
+        if filename in existing_names:
+            continue
+        print(f"  [{i}] Downloading: {filename[:60]}")
+        result = download_attachment(url, attachments_dir)
+        if result:
+            downloaded.append(result.name)
+            existing_names.add(result.name)
+            print(f"      ✓ Saved: {result.name}")
+    return downloaded
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Download PostgreSQL mailing list threads and convert to Markdown with attachments."
     )
     parser.add_argument("--thread-id", help="Thread ID or full URL to fetch.")
     parser.add_argument("--input", help="Path to local HTML file (alternative to --thread-id).")
+    parser.add_argument("--thread-dir", help="Path to existing thread directory; only download missing attachments from thread.html.")
     parser.add_argument("--output-dir", default="data/threads",
                         help="Base output directory for threads (default: data/threads).")
     args = parser.parse_args()
 
+    if args.thread_dir:
+        thread_dir = Path(args.thread_dir)
+        if not thread_dir.is_dir():
+            print(f"✗ Not a directory: {thread_dir}")
+            return
+        print(f"📧 Downloading missing attachments for: {thread_dir.name}")
+        downloaded = download_missing_attachments(thread_dir)
+        print(f"\n✅ Done. Downloaded {len(downloaded)} missing attachment(s).")
+        if downloaded:
+            index_path = thread_dir / "attachments.txt"
+            existing_index = index_path.read_text(encoding="utf-8", errors="ignore") if index_path.exists() else ""
+            new_lines = "\n".join(f"- {name}" for name in downloaded)
+            if new_lines and "- " + downloaded[0] not in existing_index:
+                index_path.write_text(existing_index.rstrip() + "\n" + new_lines + "\n", encoding="utf-8")
+        return
+
     if not args.thread_id and not args.input:
-        parser.error("Either --thread-id or --input is required")
+        parser.error("Either --thread-id, --input, or --thread-dir is required")
 
     # Determine thread_id and HTML source
     if args.input:

@@ -7,3 +7,4 @@
 ## 文章
 
 - [GOO：面向大规模连接问题的贪心连接顺序搜索算法](./goo-greedy-join-search.md)
+- [执行器批处理：面向批量的元组处理](./executor-batching.md)
