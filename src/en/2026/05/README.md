@@ -2,7 +2,7 @@
 
 PostgreSQL mailing list discussions for Week 05, 2026.
 
-🇨🇳 [中文版本](../../../cn/2026/05/README.md)
+🇨🇳 [中文版本](../../../cn/2026/05/index.html)
 
 ## Articles
 

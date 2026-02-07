@@ -2,7 +2,7 @@
 
 2026 年第 05 周的 PostgreSQL 邮件列表讨论。
 
-🇬🇧 [English Version](../../../en/2026/05/README.md)
+🇬🇧 [English Version](../../../en/2026/05/index.html)
 
 ## 文章
 
