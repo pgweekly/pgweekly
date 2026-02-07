@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 06](./en/2026/06/README.md)
+    - [COPY TO with JSON Format: Native JSON Export from PostgreSQL](./en/2026/06/copy-to-json-format.md)
   - [Week 05](./en/2026/05/README.md)
     - [GOO: A Greedy Join Search Algorithm for Large Join Problems](./en/2026/05/goo-greedy-join-search.md)
     - [Batching in Executor: Batch-Oriented Tuple Processing](./en/2026/05/executor-batching.md)
@@ -17,6 +19,8 @@
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 06 周](./cn/2026/06/README.md)
+    - [COPY TO 的 JSON 格式：PostgreSQL 原生 JSON 导出](./cn/2026/06/copy-to-json-format.md)
   - [第 05 周](./cn/2026/05/README.md)
     - [GOO：面向大规模连接问题的贪心连接顺序搜索算法](./cn/2026/05/goo-greedy-join-search.md)
     - [执行器批处理：面向批量的元组处理](./cn/2026/05/executor-batching.md)
