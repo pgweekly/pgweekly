@@ -57,6 +57,16 @@ Determine from `metadata.txt` (thread date) or use current date. Use ISO week nu
 | Chinese | Professional 中文 technical writing, natural terminology (不要直译) |
 | Both | Code blocks with syntax highlighting; links to docs/references |
 
+## Terminology (Chinese)
+
+When writing the Chinese version, use these standard translations:
+
+| English | 中文 |
+|---------|------|
+| planner | **优化器** (not 规划器) |
+
+Apply consistently in titles, body text, and navigation (e.g. "查询优化器优化", "优化器可以选择...").
+
 ## SUMMARY.md Format
 
 ```markdown
