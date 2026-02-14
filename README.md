@@ -75,20 +75,21 @@ This command will:
 
 ### Step 3: Generate Blog with Cursor Agent
 
-**Option A: Using Quick Prompt (Recommended)**
+This project includes an **agent skill** (`.cursor/skills/pgweekly-blog-generation/`) so Cursor automatically knows how to generate blogs. Use any of these:
+
+**Option A: Simple (Skill-aware)**
+
+Just say:
+```
+Generate a blog from this thread: [paste your thread ID/URL]
+```
+The agent will fetch, analyze, and generate both English and Chinese posts automatically.
+
+**Option B: Using Quick Prompt**
 
 1. Open `QUICK_PROMPT.txt`
 2. Replace both instances of `PASTE_YOUR_THREAD_ID_HERE` with your thread ID/URL
-3. Copy the entire content
-4. Paste into Cursor Agent chat
-5. Hit Enter and let the agent work!
-
-**Option B: Natural Language**
-
-Simply tell Cursor Agent:
-```
-Generate a blog from this PostgreSQL thread: [paste your thread ID/URL]
-```
+3. Copy the entire content and paste into Cursor Agent chat
 
 **Option C: Advanced Control**
 

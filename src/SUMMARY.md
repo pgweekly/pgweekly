@@ -13,6 +13,8 @@
   - [Week 03](./en/2026/03/README.md)
     - [Extended Statistics Import/Export Functions](./en/2026/03/extended-statistics-import-functions.md)
     - [pg_plan_advice: Query Plan Control](./en/2026/03/pg-plan-advice.md)
+  - [Week 07](./en/2026/07/README.md)
+    - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./en/2026/07/anti-join-left-join-optimization.md)
 
 ---
 
@@ -29,3 +31,5 @@
   - [第 03 周](./cn/2026/03/README.md)
     - [扩展统计信息导入/导出功能](./cn/2026/03/extended-statistics-import-functions.md)
     - [pg_plan_advice：查询计划控制](./cn/2026/03/pg-plan-advice.md)
+  - [第 07 周](./cn/2026/07/README.md)
+    - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的规划器优化](./cn/2026/07/anti-join-left-join-optimization.md)
