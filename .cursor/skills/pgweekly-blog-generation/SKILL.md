@@ -40,10 +40,12 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
    - Chinese: `src/cn/{year}/{week}/{descriptive-filename}.md`
    - Filename: kebab-case from main topic (e.g. `planner-count-optimization`)
 
-6. **Update** SUMMARY.md:
+6. **Update** SUMMARY.md and year READMEs:
    - Add entries under both `# 🇬🇧 English` and `# 🇨🇳 中文`
    - Follow existing hierarchy: year → week → link to article
+   - **Put the new week/article at the top** (newest first): insert the new week immediately after the year line, so the latest week appears first in the list.
    - Create `src/en/{year}/{week}/README.md` and `src/cn/{year}/{week}/README.md` if missing
+   - In `src/en/{year}/README.md` and `src/cn/{year}/README.md`, also add the new week at the **top** of the Weeks list (newest first).
 
 ## Year/Week
 

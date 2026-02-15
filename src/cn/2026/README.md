@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 07 周](./07/index.html)
+  - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的优化器优化](./07/anti-join-left-join-optimization.md)
 - [第 06 周](./06/index.html)
   - [COPY TO 的 JSON 格式：PostgreSQL 原生 JSON 导出](./06/copy-to-json-format.md)
 - [第 05 周](./05/index.html)
@@ -14,5 +16,3 @@
 - [第 03 周](./03/index.html)
   - [扩展统计信息导入/导出功能](./03/extended-statistics-import-functions.md)
   - [pg_plan_advice：查询计划控制](./03/pg-plan-advice.md)
-- [第 07 周](./07/README.md)
-  - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的优化器优化](./07/anti-join-left-join-optimization.md)

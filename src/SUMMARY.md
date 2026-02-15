@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 07](./en/2026/07/README.md)
+    - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./en/2026/07/anti-join-left-join-optimization.md)
   - [Week 06](./en/2026/06/README.md)
     - [COPY TO with JSON Format: Native JSON Export from PostgreSQL](./en/2026/06/copy-to-json-format.md)
   - [Week 05](./en/2026/05/README.md)
@@ -13,14 +15,14 @@
   - [Week 03](./en/2026/03/README.md)
     - [Extended Statistics Import/Export Functions](./en/2026/03/extended-statistics-import-functions.md)
     - [pg_plan_advice: Query Plan Control](./en/2026/03/pg-plan-advice.md)
-  - [Week 07](./en/2026/07/README.md)
-    - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./en/2026/07/anti-join-left-join-optimization.md)
 
 ---
 
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 07 周](./cn/2026/07/README.md)
+    - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的优化器优化](./cn/2026/07/anti-join-left-join-optimization.md)
   - [第 06 周](./cn/2026/06/README.md)
     - [COPY TO 的 JSON 格式：PostgreSQL 原生 JSON 导出](./cn/2026/06/copy-to-json-format.md)
   - [第 05 周](./cn/2026/05/README.md)
@@ -31,5 +33,3 @@
   - [第 03 周](./cn/2026/03/README.md)
     - [扩展统计信息导入/导出功能](./cn/2026/03/extended-statistics-import-functions.md)
     - [pg_plan_advice：查询计划控制](./cn/2026/03/pg-plan-advice.md)
-  - [第 07 周](./cn/2026/07/README.md)
-    - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的优化器优化](./cn/2026/07/anti-join-left-join-optimization.md)

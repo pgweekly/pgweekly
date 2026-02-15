@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 07](./07/index.html)
+  - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./07/anti-join-left-join-optimization.md)
 - [Week 06](./06/index.html)
   - [COPY TO with JSON Format: Native JSON Export from PostgreSQL](./06/copy-to-json-format.md)
 - [Week 05](./05/index.html)
@@ -14,5 +16,3 @@ PostgreSQL Weekly posts for 2026.
 - [Week 03](./03/index.html)
   - [Extended Statistics Import/Export Functions](./03/extended-statistics-import-functions.md)
   - [pg_plan_advice: Query Plan Control](./03/pg-plan-advice.md)
-- [Week 07](./07/README.md)
-  - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./07/anti-join-left-join-optimization.md)
