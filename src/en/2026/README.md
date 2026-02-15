@@ -5,6 +5,7 @@ PostgreSQL Weekly posts for 2026.
 ## Weeks
 
 - [Week 07](./07/index.html)
+  - [SQL Property Graph Queries (SQL/PGQ): Bringing Graph Queries to PostgreSQL](./07/sql-property-graph-queries-pgq.md)
   - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./07/anti-join-left-join-optimization.md)
 - [Week 06](./06/index.html)
   - [COPY TO with JSON Format: Native JSON Export from PostgreSQL](./06/copy-to-json-format.md)

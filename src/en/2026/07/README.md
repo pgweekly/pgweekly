@@ -6,4 +6,5 @@ PostgreSQL mailing list discussions for Week 07, 2026.
 
 ## Articles
 
+- [SQL Property Graph Queries (SQL/PGQ): Bringing Graph Queries to PostgreSQL](./sql-property-graph-queries-pgq.md)
 - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./anti-join-left-join-optimization.md)

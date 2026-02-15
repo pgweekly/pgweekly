@@ -5,6 +5,7 @@
 ## 各周
 
 - [第 07 周](./07/index.html)
+  - [SQL 属性图查询（SQL/PGQ）：为 PostgreSQL 引入图查询能力](./07/sql-property-graph-queries-pgq.md)
   - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的优化器优化](./07/anti-join-left-join-optimization.md)
 - [第 06 周](./06/index.html)
   - [COPY TO 的 JSON 格式：PostgreSQL 原生 JSON 导出](./06/copy-to-json-format.md)

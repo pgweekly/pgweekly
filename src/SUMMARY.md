@@ -4,6 +4,7 @@
 
 - [2026](./en/2026/README.md)
   - [Week 07](./en/2026/07/README.md)
+    - [SQL Property Graph Queries (SQL/PGQ): Bringing Graph Queries to PostgreSQL](./en/2026/07/sql-property-graph-queries-pgq.md)
     - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./en/2026/07/anti-join-left-join-optimization.md)
   - [Week 06](./en/2026/06/README.md)
     - [COPY TO with JSON Format: Native JSON Export from PostgreSQL](./en/2026/06/copy-to-json-format.md)
@@ -22,6 +23,7 @@
 
 - [2026](./cn/2026/README.md)
   - [第 07 周](./cn/2026/07/README.md)
+    - [SQL 属性图查询（SQL/PGQ）：为 PostgreSQL 引入图查询能力](./cn/2026/07/sql-property-graph-queries-pgq.md)
     - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的优化器优化](./cn/2026/07/anti-join-left-join-optimization.md)
   - [第 06 周](./cn/2026/06/README.md)
     - [COPY TO 的 JSON 格式：PostgreSQL 原生 JSON 导出](./cn/2026/06/copy-to-json-format.md)
