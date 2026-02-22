@@ -22,11 +22,19 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
    - `attachments/` - **Downloaded patches** (e.g. `.patch` files from the mailing list)
    - `attachments.txt` - List of downloaded attachment filenames
 
-3. **Analyze** content:
+3. **Verify** all patch set versions are downloaded (required before analyze):
+   - Read `thread.md` and `thread.html` to identify all patch versions referenced in the thread (e.g. v1, v2, v3, v4, v5…; also patterns like `0001-`, `0002-` in patch series)
+   - List files in `attachments/` and compare: every referenced version must have a corresponding downloaded file
+   - If any referenced version is missing:
+     - Run `python3 tools/fetch_data.py --thread-dir "data/threads/YYYY-MM-DD/<thread-id>"` to retry downloading missing attachments
+     - If still missing, do not proceed with analysis; report the missing versions and ask the user to verify the thread or manually add the patches
+   - Only proceed to analyze/generate once all referenced patch versions are present in `attachments/`
+
+4. **Analyze** content:
    - If multiple patch versions (v1, v2, v3...), run `diff -u` between versions to explain evolution
    - Identify main topic, key decisions, reviewer feedback
 
-4. **Generate** TWO blog posts with this structure:
+5. **Generate** TWO blog posts with this structure:
    - Clear title (topic-based)
    - Introduction (context, why it matters)
    - Technical Analysis (key points, code/patch highlights, evolution)
@@ -35,12 +43,12 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
    - Current Status (patch/discussion state)
    - Conclusion (summary, implications)
 
-5. **Save** both versions:
+6. **Save** both versions:
    - English: `src/en/{year}/{week}/{descriptive-filename}.md`
    - Chinese: `src/cn/{year}/{week}/{descriptive-filename}.md`
    - Filename: kebab-case from main topic (e.g. `planner-count-optimization`)
 
-6. **Update** SUMMARY.md and year READMEs:
+7. **Update** SUMMARY.md and year READMEs:
    - Add entries under both `# 🇬🇧 English` and `# 🇨🇳 中文`
    - Follow existing hierarchy: year → week → link to article
    - **Put the new week/article at the top** (newest first): insert the new week immediately after the year line, so the latest week appears first in the list.
