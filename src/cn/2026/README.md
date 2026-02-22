@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 08 周](./08/index.html)
+  - [消除 RI 触发器中的 SPI：外键检查的快速路径](./08/ri-fast-path-foreign-key-checks.md)
 - [第 07 周](./07/index.html)
   - [SQL 属性图查询（SQL/PGQ）：为 PostgreSQL 引入图查询能力](./07/sql-property-graph-queries-pgq.md)
   - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的优化器优化](./07/anti-join-left-join-optimization.md)

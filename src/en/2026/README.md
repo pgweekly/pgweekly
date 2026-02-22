@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 08](./08/index.html)
+  - [Eliminating SPI from RI Triggers: A Fast Path for Foreign Key Checks](./08/ri-fast-path-foreign-key-checks.md)
 - [Week 07](./07/index.html)
   - [SQL Property Graph Queries (SQL/PGQ): Bringing Graph Queries to PostgreSQL](./07/sql-property-graph-queries-pgq.md)
   - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./07/anti-join-left-join-optimization.md)

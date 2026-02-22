@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 08](./en/2026/08/README.md)
+    - [Eliminating SPI from RI Triggers: A Fast Path for Foreign Key Checks](./en/2026/08/ri-fast-path-foreign-key-checks.md)
   - [Week 07](./en/2026/07/README.md)
     - [SQL Property Graph Queries (SQL/PGQ): Bringing Graph Queries to PostgreSQL](./en/2026/07/sql-property-graph-queries-pgq.md)
     - [Reducing LEFT JOIN to ANTI JOIN: A Planner Optimization for "WHERE col IS NULL"](./en/2026/07/anti-join-left-join-optimization.md)
@@ -22,6 +24,8 @@
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 08 周](./cn/2026/08/README.md)
+    - [消除 RI 触发器中的 SPI：外键检查的快速路径](./cn/2026/08/ri-fast-path-foreign-key-checks.md)
   - [第 07 周](./cn/2026/07/README.md)
     - [SQL 属性图查询（SQL/PGQ）：为 PostgreSQL 引入图查询能力](./cn/2026/07/sql-property-graph-queries-pgq.md)
     - [将 LEFT JOIN 归约为 ANTI JOIN：针对 "WHERE col IS NULL" 的优化器优化](./cn/2026/07/anti-join-left-join-optimization.md)
