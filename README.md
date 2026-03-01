@@ -1,10 +1,9 @@
 # PostgreSQL Weekly - A Hacker's Digest
 
-> A technical blog aggregating and analyzing discussions from PostgreSQL mailing lists, powered by Cursor Agent.
+> A technical blog aggregating and analyzing discussions from [pgsql-hackers](https://www.postgresql.org/list/pgsql-hackers/), powered by Cursor Agent.
 
 [![mdBook](https://img.shields.io/badge/built%20with-mdBook-blue)](https://rust-lang.github.io/mdBook/)
 [![Cursor AI](https://img.shields.io/badge/powered%20by-Cursor%20AI-purple)](https://cursor.sh/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Mailing%20Lists-336791)](https://www.postgresql.org/list/)
 
 ## 🎯 Project Overview
 
@@ -15,46 +14,11 @@ This project automates the process of:
 4. **Generating** high-quality technical blog posts using AI (Cursor Agent)
 5. **Publishing** organized weekly digests using mdBook
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Python 3.7+
-- mdBook (for building the site)
-- Optional: `html2text` for better Markdown conversion
-  ```bash
-  pip install html2text
-  ```
-
-### Setup
-
-1. **Clone the repository**
-   ```bash
-   git clone <your-repo-url>
-   cd pgweekly
-   ```
-
-2. **Create your prompt file** (first time only)
-   ```bash
-   cp QUICK_PROMPT.template QUICK_PROMPT.txt
-   ```
-   > **Important:**
-   > - `QUICK_PROMPT.template` is the version-controlled template
-   > - `QUICK_PROMPT.txt` is your personal working copy (gitignored)
-   > - Always copy from the template when starting fresh
-   > - You can customize `QUICK_PROMPT.txt` without affecting the repository
-
-3. **Build the book** (optional, to view existing content)
-   ```bash
-   mdbook build
-   mdbook serve  # View at http://localhost:3000
-   ```
-
 ## 📝 Workflow: From Thread to Blog
 
 ### Step 1: Find a Thread
 
-Visit [PostgreSQL Mailing Lists](https://www.postgresql.org/list/) and find an interesting discussion. Copy the thread URL or ID.
+Visit [pgsql-hackers](https://www.postgresql.org/list/pgsql-hackers/) and find an interesting discussion. Copy the thread URL or ID.
 
 Example URL:
 ```
@@ -241,61 +205,6 @@ git commit -m "Add blog: [topic]"
 git push
 ```
 
-## 📖 Advanced Topics
-
-### Batch Processing
-
-Process multiple threads at once:
-
-```bash
-# Fetch multiple threads
-for thread_id in "id1" "id2" "id3"; do
-    python3 tools/fetch_data.py --thread-id "$thread_id"
-done
-```
-
-Then use the batch processing prompt in `BLOG_GENERATION_PROMPT.md`.
-
-### Custom Prompts
-
-Customize `QUICK_PROMPT.txt` for your needs:
-- Adjust writing style (formal, conversational)
-- Focus on specific aspects (performance, security)
-- Target specific audiences (DBAs, developers, beginners)
-- Change blog length or depth
-
-### Comparing Patches
-
-When multiple patch versions exist (v1, v2, v3), the agent will automatically:
-```bash
-diff -u attachments/v1-*.patch attachments/v2-*.patch
-```
-
-This helps explain how the solution evolved based on community feedback.
-
-## 🎓 Learning Resources
-
-- [PostgreSQL Mailing Lists](https://www.postgresql.org/list/)
-- [mdBook Documentation](https://rust-lang.github.io/mdBook/)
-- [PostgreSQL Documentation](https://www.postgresql.org/docs/)
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create your feature branch
-3. Follow the existing content structure
-4. Submit a pull request
-
 ## 📄 License
 
 See [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- PostgreSQL community for the valuable mailing list discussions
-- Cursor AI for powering the blog generation
-- mdBook for the excellent static site generator
-
----
-
-**Pro Tip:** Keep `QUICK_PROMPT.txt` customized for your workflow, but always refer back to `QUICK_PROMPT.template` for the latest structure and improvements.
