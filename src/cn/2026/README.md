@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 09 周](./09/index.html)
+  - [元组解构的进一步加速：预计算 attcacheoff](./09/tuple-deformation-speedups.md)
 - [第 08 周](./08/index.html)
   - [消除 RI 触发器中的 SPI：外键检查的快速路径](./08/ri-fast-path-foreign-key-checks.md)
 - [第 07 周](./07/index.html)

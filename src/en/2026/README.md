@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 09](./09/index.html)
+  - [More Speedups for Tuple Deformation: Precalculating attcacheoff](./09/tuple-deformation-speedups.md)
 - [Week 08](./08/index.html)
   - [Eliminating SPI from RI Triggers: A Fast Path for Foreign Key Checks](./08/ri-fast-path-foreign-key-checks.md)
 - [Week 07](./07/index.html)

@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 09](./en/2026/09/README.md)
+    - [More Speedups for Tuple Deformation: Precalculating attcacheoff](./en/2026/09/tuple-deformation-speedups.md)
   - [Week 08](./en/2026/08/README.md)
     - [Eliminating SPI from RI Triggers: A Fast Path for Foreign Key Checks](./en/2026/08/ri-fast-path-foreign-key-checks.md)
   - [Week 07](./en/2026/07/README.md)
@@ -24,6 +26,8 @@
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 09 周](./cn/2026/09/README.md)
+    - [元组解构的进一步加速：预计算 attcacheoff](./cn/2026/09/tuple-deformation-speedups.md)
   - [第 08 周](./cn/2026/08/README.md)
     - [消除 RI 触发器中的 SPI：外键检查的快速路径](./cn/2026/08/ri-fast-path-foreign-key-checks.md)
   - [第 07 周](./cn/2026/07/README.md)
