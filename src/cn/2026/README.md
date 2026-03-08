@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 10 周](/cn/2026/10/index.html)
+  - [通用计划与初始裁剪：为分区表减少锁竞争](/cn/2026/10/generic-plans-initial-pruning.html)
 - [第 09 周](/cn/2026/09/index.html)
   - [元组解构的进一步加速：预计算 attcacheoff](/cn/2026/09/tuple-deformation-speedups.html)
 - [第 08 周](/cn/2026/08/index.html)

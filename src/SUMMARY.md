@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 10](./en/2026/10/README.md)
+    - [Generic Plans and Initial Pruning: Fewer Locks for Partitioned Tables](./en/2026/10/generic-plans-initial-pruning.md)
   - [Week 09](./en/2026/09/README.md)
     - [More Speedups for Tuple Deformation: Precalculating attcacheoff](./en/2026/09/tuple-deformation-speedups.md)
   - [Week 08](./en/2026/08/README.md)
@@ -20,12 +22,13 @@
   - [Week 03](./en/2026/03/README.md)
     - [Extended Statistics Import/Export Functions](./en/2026/03/extended-statistics-import-functions.md)
     - [pg_plan_advice: Query Plan Control](./en/2026/03/pg-plan-advice.md)
-
 ---
 
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 10 周](./cn/2026/10/README.md)
+    - [通用计划与初始裁剪：为分区表减少锁竞争](./cn/2026/10/generic-plans-initial-pruning.md)
   - [第 09 周](./cn/2026/09/README.md)
     - [元组解构的进一步加速：预计算 attcacheoff](./cn/2026/09/tuple-deformation-speedups.md)
   - [第 08 周](./cn/2026/08/README.md)

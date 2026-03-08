@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 10](/en/2026/10/index.html)
+  - [Generic Plans and Initial Pruning: Fewer Locks for Partitioned Tables](/en/2026/10/generic-plans-initial-pruning.html)
 - [Week 09](/en/2026/09/index.html)
   - [More Speedups for Tuple Deformation: Precalculating attcacheoff](/en/2026/09/tuple-deformation-speedups.html)
 - [Week 08](/en/2026/08/index.html)
