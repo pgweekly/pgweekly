@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 11](/en/2026/11/index.html)
+  - [Converting NOT IN Sublinks to Anti-Joins When Safe](/en/2026/11/not-in-sublinks-anti-joins.html)
 - [Week 10](/en/2026/10/index.html)
   - [Generic Plans and Initial Pruning: Fewer Locks for Partitioned Tables](/en/2026/10/generic-plans-initial-pruning.html)
 - [Week 09](/en/2026/09/index.html)

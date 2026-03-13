@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 11](./en/2026/11/README.md)
+    - [Converting NOT IN Sublinks to Anti-Joins When Safe](./en/2026/11/not-in-sublinks-anti-joins.md)
   - [Week 10](./en/2026/10/README.md)
     - [Generic Plans and Initial Pruning: Fewer Locks for Partitioned Tables](./en/2026/10/generic-plans-initial-pruning.md)
   - [Week 09](./en/2026/09/README.md)
@@ -27,6 +29,8 @@
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 11 周](./cn/2026/11/README.md)
+    - [将 NOT IN 子链接安全地转换为 ANTI JOIN](./cn/2026/11/not-in-sublinks-anti-joins.md)
   - [第 10 周](./cn/2026/10/README.md)
     - [通用计划与初始裁剪：为分区表减少锁竞争](./cn/2026/10/generic-plans-initial-pruning.md)
   - [第 09 周](./cn/2026/09/README.md)

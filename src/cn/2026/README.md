@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 11 周](/cn/2026/11/index.html)
+  - [将 NOT IN 子链接安全地转换为 ANTI JOIN](/cn/2026/11/not-in-sublinks-anti-joins.html)
 - [第 10 周](/cn/2026/10/index.html)
   - [通用计划与初始裁剪：为分区表减少锁竞争](/cn/2026/10/generic-plans-initial-pruning.html)
 - [第 09 周](/cn/2026/09/index.html)
