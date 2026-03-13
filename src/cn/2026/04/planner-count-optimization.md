@@ -1,8 +1,8 @@
-# PostgreSQL 查询规划器优化：自动 COUNT(*) 转换
+# PostgreSQL 查询优化器优化：自动 COUNT(*) 转换
 
 ## 引言
 
-2025 年 10 月，PostgreSQL 提交者 David Rowley 提出了一个重要的查询规划器优化，能够自动将 `COUNT(1)` 和 `COUNT(not_null_col)` 表达式转换为 `COUNT(*)`。这个优化解决了一个常见的性能反模式：开发者认为 `COUNT(1)` 等同于 `COUNT(*)`，但实际上 `COUNT(*)` 更高效。该补丁于 2025 年 11 月提交，并引入了用于聚合函数简化的新基础设施。
+2025 年 10 月，PostgreSQL 提交者 David Rowley 提出了一个重要的查询优化器优化，能够自动将 `COUNT(1)` 和 `COUNT(not_null_col)` 表达式转换为 `COUNT(*)`。这个优化解决了一个常见的性能反模式：开发者认为 `COUNT(1)` 等同于 `COUNT(*)`，但实际上 `COUNT(*)` 更高效。该补丁于 2025 年 11 月提交，并引入了用于聚合函数简化的新基础设施。
 
 ## 为什么这很重要
 
@@ -156,7 +156,7 @@ SELECT count(nullable_col) FROM t WHERE nullable_col IS NOT NULL;
 
 ## 结论
 
-这个优化代表了 PostgreSQL 查询规划器的重大改进，自动修复了常见的性能反模式，而无需更改应用程序。新的 `SupportRequestSimplifyAggref` 基础设施也为未来的聚合优化打开了大门。
+这个优化代表了 PostgreSQL 查询优化器的重大改进，自动修复了常见的性能反模式，而无需更改应用程序。新的 `SupportRequestSimplifyAggref` 基础设施也为未来的聚合优化打开了大门。
 
 对于开发者和 DBA：
 - **无需操作**：优化会自动发生

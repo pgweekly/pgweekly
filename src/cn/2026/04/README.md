@@ -6,4 +6,4 @@
 
 ## 文章
 
-- [PostgreSQL 查询规划器优化：自动 COUNT(*) 转换](./planner-count-optimization.md)
+- [PostgreSQL 查询优化器优化：自动 COUNT(*) 转换](./planner-count-optimization.md)
