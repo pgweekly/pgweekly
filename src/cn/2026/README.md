@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 12 周](/cn/2026/12/index.html)
+  - [缩短含 NULL 的大规模 NOT IN 列表的规划时间](/cn/2026/12/not-in-null-planning-optimization.html)
 - [第 11 周](/cn/2026/11/index.html)
   - [将 NOT IN 子链接安全地转换为 ANTI JOIN](/cn/2026/11/not-in-sublinks-anti-joins.html)
 - [第 10 周](/cn/2026/10/index.html)

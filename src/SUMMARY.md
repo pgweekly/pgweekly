@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 12](./en/2026/12/README.md)
+    - [Reduce Planning Time for Large NOT IN Lists Containing NULL](./en/2026/12/not-in-null-planning-optimization.md)
   - [Week 11](./en/2026/11/README.md)
     - [Converting NOT IN Sublinks to Anti-Joins When Safe](./en/2026/11/not-in-sublinks-anti-joins.md)
   - [Week 10](./en/2026/10/README.md)
@@ -29,6 +31,8 @@
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 12 周](./cn/2026/12/README.md)
+    - [缩短含 NULL 的大规模 NOT IN 列表的规划时间](./cn/2026/12/not-in-null-planning-optimization.md)
   - [第 11 周](./cn/2026/11/README.md)
     - [将 NOT IN 子链接安全地转换为 ANTI JOIN](./cn/2026/11/not-in-sublinks-anti-joins.md)
   - [第 10 周](./cn/2026/10/README.md)
