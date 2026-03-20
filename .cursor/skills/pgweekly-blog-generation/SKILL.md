@@ -9,26 +9,29 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
 
 ## Quick Workflow
 
-1. **Fetch** thread data (required; do not skip): run the fetch script so that the thread HTML, Markdown, and **all patch attachments** are downloaded and saved under `data/threads/`:
+1. **Fetch** thread data (required; do not skip):
    ```bash
    python3 tools/fetch_data.py --thread-id "{THREAD_ID_OR_URL}"
    ```
-   This creates `data/threads/YYYY-MM-DD/<sanitized-thread-id>/` and downloads every `.patch` (and other allowed attachments) into `data/threads/YYYY-MM-DD/<sanitized-thread-id>/attachments/`. Always run this step before writing the blog.
+   - **Wait for the command to finish** (check exit code is 0). Do not proceed if fetch failed.
+   - This creates `data/threads/YYYY-MM-DD/<sanitized-thread-id>/` and downloads attachments into `attachments/`.
+   - The `YYYY-MM-DD` in the path is the **fetch date** (when you ran the script), NOT the thread date—do not use it for year/week.
 
 2. **Locate** fetched content in `data/threads/YYYY-MM-DD/<thread-id>/`:
    - `thread.html` - Original HTML
    - `thread.md` - Converted Markdown
-   - `metadata.txt` - Thread info (use for year/week)
+   - `metadata.txt` - Thread info
    - `attachments/` - **Downloaded patches** (e.g. `.patch` files from the mailing list)
    - `attachments.txt` - List of downloaded attachment filenames
 
-3. **Verify** all patch set versions are downloaded (required before analyze):
-   - Read `thread.md` and `thread.html` to identify all patch versions referenced in the thread (e.g. v1, v2, v3, v4, v5…; also patterns like `0001-`, `0002-` in patch series)
-   - List files in `attachments/` and compare: every referenced version must have a corresponding downloaded file
-   - If any referenced version is missing:
-     - Run `python3 tools/fetch_data.py --thread-dir "data/threads/YYYY-MM-DD/<thread-id>"` to retry downloading missing attachments
-     - If still missing, do not proceed with analysis; report the missing versions and ask the user to verify the thread or manually add the patches
-   - Only proceed to analyze/generate once all referenced patch versions are present in `attachments/`
+3. **Verify** all patch set versions are downloaded — **MANDATORY GATE; do not skip**:
+   - Read `thread.md` and `thread.html` to identify **all** patch versions referenced (v1, v2, v3…; or `0001-`, `0002-` in patch series)
+   - Run `ls data/threads/YYYY-MM-DD/<thread-id>/attachments/` and compare with the list of referenced versions
+   - **If any referenced version is missing:**
+     - Run `python3 tools/fetch_data.py --thread-dir "data/threads/YYYY-MM-DD/<thread-id>"` to retry
+     - Re-verify; if still missing, **STOP** — report missing versions to the user and do not write the blog
+   - **If the thread has no patches**, verification passes (nothing to check).
+   - **CRITICAL:** Do not proceed to step 4 (Analyze) until you have explicitly confirmed: "Referenced versions: [list] ✓ All present in attachments/". Only then may you write the blog.
 
 4. **Analyze** content:
    - If multiple patch versions (v1, v2, v3...), run `diff -u` between versions to explain evolution
@@ -48,7 +51,7 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
    - Chinese: `src/cn/{year}/{week}/{descriptive-filename}.md`
    - Filename: kebab-case from main topic (e.g. `planner-count-optimization`)
 
-7. **Update** SUMMARY.md and year READMEs:
+7. **Update** `src/SUMMARY.md` and year READMEs:
    - Add entries under both `# 🇬🇧 English` and `# 🇨🇳 中文`
    - Follow existing hierarchy: year → week → link to article
    - **Put the new week/article at the top** (newest first): insert the new week immediately after the year line, so the latest week appears first in the list.
@@ -57,7 +60,12 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
 
 ## Year/Week
 
-Determine from `metadata.txt` (thread date) or use current date. Use ISO week number (e.g. 06 for week 6).
+**Use the blog writing date (the day you write the blog) as the source of truth.** This determines which week the article is filed under.
+
+**Rules:**
+- Compute ISO year and ISO week from **today's date** (the date when the blog is being written).
+- Example: if writing on 2026-03-20, use year=2026, week=12 (from `datetime(2026, 3, 20).isocalendar()`).
+- **Do NOT use** the thread date, `metadata.txt`, the directory name `YYYY-MM-DD` (fetch date), or "Downloaded:" for year/week.
 
 ## Writing Guidelines
 

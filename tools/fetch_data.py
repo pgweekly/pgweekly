@@ -5,6 +5,7 @@ import os
 import re
 from datetime import datetime
 from pathlib import Path
+from email.utils import parsedate_to_datetime
 import urllib.request
 from html.parser import HTMLParser
 
@@ -49,6 +50,37 @@ def extract_title(html: str) -> str:
     if match:
         return match.group(1).strip()
     return "PostgreSQL Thread Summary"
+
+
+def extract_thread_date(html: str) -> str | None:
+    """Extract the first/original message date from thread HTML for year/week determination.
+    Returns YYYY-MM-DD or None if not found.
+    """
+    # RFC 2822 style: "Mon, 20 Jan 2026 12:00:00 +0000" or "Date: Mon, 20 Jan 2026..."
+    rfc2822 = re.findall(
+        r'(?:Date:\s*)?([A-Za-z]{3},\s*\d{1,2}\s+[A-Za-z]{3}\s+\d{4}\s+\d{1,2}:\d{2}(?::\d{2})?\s*[+-]\d{4})',
+        html
+    )
+    for s in rfc2822:
+        try:
+            dt = parsedate_to_datetime(s.strip())
+            return dt.strftime("%Y-%m-%d")
+        except (ValueError, TypeError):
+            continue
+    # "On Mon, Jan 20, 2026 at 12:00 PM" style
+    on_wrote = re.findall(
+        r'On\s+([A-Za-z]{3}),\s*([A-Za-z]{3})\s+(\d{1,2}),?\s+(\d{4})',
+        html
+    )
+    if on_wrote:
+        try:
+            # Use first (original) message date
+            _, month_str, day, year = on_wrote[0]
+            dt = datetime.strptime(f"{month_str} {day} {year}", "%b %d %Y")
+            return dt.strftime("%Y-%m-%d")
+        except ValueError:
+            pass
+    return None
 
 
 def html_to_markdown(html: str) -> str:
@@ -297,16 +329,31 @@ def main() -> None:
         print("  No attachments found")
 
     # Step 6: Create metadata file
-    metadata_path = thread_dir / "metadata.txt"
-    metadata_content = "\n".join([
+    thread_date_str = extract_thread_date(html)
+    iso_year, iso_week = "", ""
+    if thread_date_str:
+        try:
+            dt = datetime.strptime(thread_date_str, "%Y-%m-%d")
+            iso_year = str(dt.isocalendar()[0])
+            iso_week = f"{dt.isocalendar()[1]:02d}"
+        except ValueError:
+            pass
+
+    metadata_lines = [
         f"Thread ID: {thread_id}",
         f"Title: {title}",
         f"Downloaded: {datetime.now().isoformat()}",
         f"HTML Size: {len(html)} bytes",
         f"Markdown Size: {len(markdown_content)} chars",
         f"Attachments: {len(attachments) if attachments else 0}",
-    ])
-    metadata_path.write_text(metadata_content, encoding="utf-8")
+    ]
+    if thread_date_str:
+        metadata_lines.insert(2, f"Thread date: {thread_date_str}")
+        if iso_year and iso_week:
+            metadata_lines.insert(3, f"ISO year: {iso_year}, ISO week: {iso_week}")
+
+    metadata_path = thread_dir / "metadata.txt"
+    metadata_path.write_text("\n".join(metadata_lines), encoding="utf-8")
 
     print(f"\n✅ Done! All files saved to: {thread_dir.resolve()}")
     print(f"\nContents:")
