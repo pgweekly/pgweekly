@@ -5,6 +5,7 @@
 ## 各周
 
 - [第 13 周](/cn/2026/13/index.html)
+  - [UUID 与 base32hex 编码](/cn/2026/13/uuid-base32hex-encode-decode.html)
   - [JSONPath 字符串方法：在路径里清洗 JSON，以及一场关于不可变性的长跑讨论](/cn/2026/13/jsonpath-string-methods.html)
 - [第 12 周](/cn/2026/12/index.html)
   - [缩短含 NULL 的大规模 NOT IN 列表的规划时间](/cn/2026/12/not-in-null-planning-optimization.html)

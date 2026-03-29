@@ -5,6 +5,7 @@ PostgreSQL Weekly posts for 2026.
 ## Weeks
 
 - [Week 13](/en/2026/13/index.html)
+  - [UUID and Base32hex Encoding](/en/2026/13/uuid-base32hex-encode-decode.html)
   - [JSONPath String Methods: Cleaning JSON Inside the Path—and a Long Debate About Immutability](/en/2026/13/jsonpath-string-methods.html)
 - [Week 12](/en/2026/12/index.html)
   - [Reduce Planning Time for Large NOT IN Lists Containing NULL](/en/2026/12/not-in-null-planning-optimization.html)

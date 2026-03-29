@@ -4,6 +4,7 @@
 
 - [2026](./en/2026/README.md)
   - [Week 13](./en/2026/13/README.md)
+    - [UUID and Base32hex Encoding](./en/2026/13/uuid-base32hex-encode-decode.md)
     - [JSONPath String Methods: Cleaning JSON Inside the Path—and a Long Debate About Immutability](./en/2026/13/jsonpath-string-methods.md)
   - [Week 12](./en/2026/12/README.md)
     - [Reduce Planning Time for Large NOT IN Lists Containing NULL](./en/2026/12/not-in-null-planning-optimization.md)
@@ -34,6 +35,7 @@
 
 - [2026](./cn/2026/README.md)
   - [第 13 周](./cn/2026/13/README.md)
+    - [UUID 与 base32hex 编码](./cn/2026/13/uuid-base32hex-encode-decode.md)
     - [JSONPath 字符串方法：在路径里清洗 JSON，以及一场关于不可变性的长跑讨论](./cn/2026/13/jsonpath-string-methods.md)
   - [第 12 周](./cn/2026/12/README.md)
     - [缩短含 NULL 的大规模 NOT IN 列表的规划时间](./cn/2026/12/not-in-null-planning-optimization.md)
