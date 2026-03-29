@@ -2,8 +2,6 @@
 
 2026 年第 07 周的 PostgreSQL 邮件列表讨论。
 
-🇬🇧 [English Version](../../../en/2026/07/README.md)
-
 ## 文章
 
 - [SQL 属性图查询（SQL/PGQ）：为 PostgreSQL 引入图查询能力](./sql-property-graph-queries-pgq.md)
