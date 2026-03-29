@@ -1,0 +1,41 @@
+/* Align all right-side actions on one vertical center line */
+#menu-bar .right-buttons {
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+}
+
+/* Language switch in mdBook menu bar */
+#menu-bar .right-buttons a.pgw-menu-lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  box-sizing: border-box;
+  height: var(--menu-bar-height);
+  padding: 0 10px 0 6px;
+  margin-right: 4px;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--icons);
+  text-decoration: none;
+}
+
+#menu-bar .right-buttons a.pgw-menu-lang:hover {
+  color: var(--icons-hover);
+}
+
+/* Icon: optically nudged down to match print/github glyphs */
+#menu-bar .right-buttons a.pgw-menu-lang > .fa-language {
+  padding: 0;
+  font-size: 1.45rem;
+  line-height: 1;
+  position: relative;
+  top: 0px;
+}
+
+#menu-bar .right-buttons a.pgw-menu-lang .pgw-menu-lang-label {
+  line-height: 1;
+  position: relative;
+  top: -1px;
+}
