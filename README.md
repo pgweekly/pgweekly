@@ -85,7 +85,6 @@ pgweekly/
 ├── BLOG_GENERATION_PROMPT.md          # Detailed prompt templates and docs
 ├── book.toml                          # mdBook configuration
 ├── src/                               # Blog content (Markdown)
-│   ├── README.md                      # Landing page with language selection
 │   ├── SUMMARY.md                     # Table of contents
 │   ├── en/                            # English blog posts
 │   │   └── {year}/                    # Organized by year
