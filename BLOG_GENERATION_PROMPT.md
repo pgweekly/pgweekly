@@ -36,6 +36,7 @@ I need you to act as a PostgreSQL expert and technical writer to generate a high
    - **Technical Analysis:**
      - Key discussion points and decisions
      - Code examples or patch highlights (if relevant)
+     - **SQL examples:** When the topic can be shown with SQL (functions, DDL, queries, `EXPLAIN`, patterns from regression tests), add a subsection with copy-pasteable `sql` blocks in **both** English and Chinese; include version/caveats if needed. Skip only when SQL would be misleading or not applicable—see `SQL examples convention` in `.cursor/skills/pgweekly-blog-generation/SKILL.md`.
      - Evolution of the solution (compare patch versions if multiple exist)
    - **Community Insights:**
      - Important reviewer feedback

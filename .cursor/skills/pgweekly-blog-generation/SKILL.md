@@ -45,6 +45,7 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
    - Technical Details (implementation, edge cases, performance)
    - Current Status (patch/discussion state)
    - Conclusion (summary, implications)
+   - **SQL examples:** follow the [SQL examples convention](#sql-examples-convention) below (both languages).
 
 6. **Save** both versions:
    - English: `src/en/{year}/{week}/{descriptive-filename}.md`
@@ -74,6 +75,28 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
 | English | Professional technical writing, clear explanations |
 | Chinese | Professional 中文 technical writing, natural terminology (不要直译) |
 | Both | Code blocks with syntax highlighting; links to docs/references |
+
+## SQL examples convention
+
+**Default:** If the thread topic can reasonably be illustrated with **SQL** (new/changed functions, syntax, `EXPLAIN`, DDL, GUCs demonstrable in SQL, query patterns, regression-test-style snippets from patches), include a **dedicated subsection** with one or more examples in **both** the English and Chinese posts. Readers expect copy-pasteable snippets.
+
+**What to include**
+
+- Fenced blocks with `sql` syntax highlighting.
+- Examples grounded in the thread or attachments (e.g. `strings.sql` / `uuid.sql` from patches, or minimal repros of discussed behavior).
+- Short comments on **expected shape of results** or **version/commit requirements** when the feature is not in a released PostgreSQL yet—avoid implying examples run on every existing install without a caveat.
+
+**When to skip**
+
+- The discussion is purely internal (e.g. executor internals with no user-visible SQL), or SQL would be misleading or enormous. In those cases, C snippets or prose are enough; do not force SQL.
+
+**Placement**
+
+- Usually under **Technical Analysis** or **Technical Details** (e.g. `### SQL examples` / `### SQL 示例`); keep EN and CN structurally aligned.
+
+**Parity**
+
+- Chinese and English posts should carry the **same** examples (same statements; comments may be localized).
 
 ## Terminology (Chinese)
 
