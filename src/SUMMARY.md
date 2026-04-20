@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 14](./en/2026/14/README.md)
+    - [CAST with NULL or DEFAULT ON ERROR: A WIP on Error-Safe Casts—and Why It Stalled on Standards](./en/2026/14/cast-null-default-on-error.md)
   - [Week 13](./en/2026/13/README.md)
     - [UUID and Base32hex Encoding](./en/2026/13/uuid-base32hex-encode-decode.md)
     - [JSONPath String Methods: Cleaning JSON Inside the Path—and a Long Debate About Immutability](./en/2026/13/jsonpath-string-methods.md)
@@ -34,6 +36,8 @@
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 14 周](./cn/2026/14/README.md)
+    - [带 NULL 或 DEFAULT ON ERROR 的 CAST：错误安全类型转换的 WIP，以及为何在标准层面搁浅](./cn/2026/14/cast-null-default-on-error.md)
   - [第 13 周](./cn/2026/13/README.md)
     - [UUID 与 base32hex 编码](./cn/2026/13/uuid-base32hex-encode-decode.md)
     - [JSONPath 字符串方法：在路径里清洗 JSON，以及一场关于不可变性的长跑讨论](./cn/2026/13/jsonpath-string-methods.md)

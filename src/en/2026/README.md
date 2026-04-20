@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 14](/en/2026/14/index.html)
+  - [CAST with NULL or DEFAULT ON ERROR: A WIP on Error-Safe Casts—and Why It Stalled on Standards](/en/2026/14/cast-null-default-on-error.html)
 - [Week 13](/en/2026/13/index.html)
   - [UUID and Base32hex Encoding](/en/2026/13/uuid-base32hex-encode-decode.html)
   - [JSONPath String Methods: Cleaning JSON Inside the Path—and a Long Debate About Immutability](/en/2026/13/jsonpath-string-methods.html)
