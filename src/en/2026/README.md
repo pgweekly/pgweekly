@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 17](/en/2026/17/index.html)
+  - [PostgreSQL Storage I/O Transformation Hooks: Decoupling Core Storage from Encryption Logic](/en/2026/17/storage-io-transformation-hooks.html)
 - [Week 14](/en/2026/14/index.html)
   - [CAST with NULL or DEFAULT ON ERROR: A WIP on Error-Safe Casts—and Why It Stalled on Standards](/en/2026/14/cast-null-default-on-error.html)
 - [Week 13](/en/2026/13/index.html)
