@@ -8,7 +8,7 @@ title = "Postgres Weekly, A Hacker’s Digest"
 [output.html]
 no-section-label = true
 git-repository-url = "https://github.com/pgweekly/pgweekly.github.io"
-additional-js = ["extra.js"]
+additional-js = ["extra.js", "ga.js"]
 additional-css = ["extra.css"]
 
 [output.html.fold]
