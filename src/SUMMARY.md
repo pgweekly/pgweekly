@@ -4,6 +4,7 @@
 
 - [2026](./en/2026/README.md)
   - [Week 17](./en/2026/17/README.md)
+    - [Meson Test Failures in PostgreSQL: Making CI Output Actionable](./en/2026/17/meson-test-failure-output.md)
     - [Post-special Page Storage for TDE: How a TDE Proposal Evolved into Broader Page-Space Refactoring](./en/2026/17/post-special-page-storage-tde-support.md)
     - [PostgreSQL Storage I/O Transformation Hooks: Decoupling Core Storage from Encryption Logic](./en/2026/17/storage-io-transformation-hooks.md)
   - [Week 14](./en/2026/14/README.md)
@@ -40,6 +41,7 @@
 
 - [2026](./cn/2026/README.md)
   - [第 17 周](./cn/2026/17/README.md)
+    - [让 PostgreSQL Meson 测试失败输出可操作：从多次补丁迭代到已合并](./cn/2026/17/meson-test-failure-output.md)
     - [面向 TDE 的 post-special 页面存储：一个加密提案如何演进为页面空间抽象重构](./cn/2026/17/post-special-page-storage-tde-support.md)
     - [PostgreSQL 存储 I/O 转换 Hook：将核心存储与加密逻辑解耦](./cn/2026/17/storage-io-transformation-hooks.md)
   - [第 14 周](./cn/2026/14/README.md)

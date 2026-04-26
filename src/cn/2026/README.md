@@ -5,6 +5,7 @@
 ## 各周
 
 - [第 17 周](/cn/2026/17/index.html)
+  - [让 PostgreSQL Meson 测试失败输出可操作：从多次补丁迭代到已合并](/cn/2026/17/meson-test-failure-output.html)
   - [面向 TDE 的 post-special 页面存储：一个加密提案如何演进为页面空间抽象重构](/cn/2026/17/post-special-page-storage-tde-support.html)
   - [PostgreSQL 存储 I/O 转换 Hook：将核心存储与加密逻辑解耦](/cn/2026/17/storage-io-transformation-hooks.html)
 - [第 14 周](/cn/2026/14/index.html)

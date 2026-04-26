@@ -5,6 +5,7 @@ PostgreSQL Weekly posts for 2026.
 ## Weeks
 
 - [Week 17](/en/2026/17/index.html)
+  - [Meson Test Failures in PostgreSQL: Making CI Output Actionable](/en/2026/17/meson-test-failure-output.html)
   - [Post-special Page Storage for TDE: How a TDE Proposal Evolved into Broader Page-Space Refactoring](/en/2026/17/post-special-page-storage-tde-support.html)
   - [PostgreSQL Storage I/O Transformation Hooks: Decoupling Core Storage from Encryption Logic](/en/2026/17/storage-io-transformation-hooks.html)
 - [Week 14](/en/2026/14/index.html)
