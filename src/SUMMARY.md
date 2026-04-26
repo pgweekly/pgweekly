@@ -4,6 +4,7 @@
 
 - [2026](./en/2026/README.md)
   - [Week 17](./en/2026/17/README.md)
+    - [Post-special Page Storage for TDE: How a TDE Proposal Evolved into Broader Page-Space Refactoring](./en/2026/17/post-special-page-storage-tde-support.md)
     - [PostgreSQL Storage I/O Transformation Hooks: Decoupling Core Storage from Encryption Logic](./en/2026/17/storage-io-transformation-hooks.md)
   - [Week 14](./en/2026/14/README.md)
     - [CAST with NULL or DEFAULT ON ERROR: A WIP on Error-Safe Casts—and Why It Stalled on Standards](./en/2026/14/cast-null-default-on-error.md)
@@ -39,6 +40,7 @@
 
 - [2026](./cn/2026/README.md)
   - [第 17 周](./cn/2026/17/README.md)
+    - [面向 TDE 的 post-special 页面存储：一个加密提案如何演进为页面空间抽象重构](./cn/2026/17/post-special-page-storage-tde-support.md)
     - [PostgreSQL 存储 I/O 转换 Hook：将核心存储与加密逻辑解耦](./cn/2026/17/storage-io-transformation-hooks.md)
   - [第 14 周](./cn/2026/14/README.md)
     - [带 NULL 或 DEFAULT ON ERROR 的 CAST：错误安全类型转换的 WIP，以及为何在标准层面搁浅](./cn/2026/14/cast-null-default-on-error.md)
