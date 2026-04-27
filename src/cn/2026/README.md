@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 18 周](/cn/2026/18/index.html)
+  - [修复 PostgreSQL 17/18 的部分索引匹配回归：NullTest 常量化简问题深析](/cn/2026/18/partial-index-nulltest-const-simplification.html)
 - [第 17 周](/cn/2026/17/index.html)
   - [让 PostgreSQL Meson 测试失败输出可操作：从多次补丁迭代到已合并](/cn/2026/17/meson-test-failure-output.html)
   - [面向 TDE 的 post-special 页面存储：一个加密提案如何演进为页面空间抽象重构](/cn/2026/17/post-special-page-storage-tde-support.html)

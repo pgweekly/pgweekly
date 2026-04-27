@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 18](/en/2026/18/index.html)
+  - [Fixing Partial Index Matching Regressions in PostgreSQL 17/18: A Deep Dive into NullTest Const-Simplification](/en/2026/18/partial-index-nulltest-const-simplification.html)
 - [Week 17](/en/2026/17/index.html)
   - [Meson Test Failures in PostgreSQL: Making CI Output Actionable](/en/2026/17/meson-test-failure-output.html)
   - [Post-special Page Storage for TDE: How a TDE Proposal Evolved into Broader Page-Space Refactoring](/en/2026/17/post-special-page-storage-tde-support.html)

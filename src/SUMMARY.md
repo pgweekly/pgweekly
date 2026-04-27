@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 18](./en/2026/18/README.md)
+    - [Fixing Partial Index Matching Regressions in PostgreSQL 17/18: A Deep Dive into NullTest Const-Simplification](./en/2026/18/partial-index-nulltest-const-simplification.md)
   - [Week 17](./en/2026/17/README.md)
     - [Meson Test Failures in PostgreSQL: Making CI Output Actionable](./en/2026/17/meson-test-failure-output.md)
     - [Post-special Page Storage for TDE: How a TDE Proposal Evolved into Broader Page-Space Refactoring](./en/2026/17/post-special-page-storage-tde-support.md)
@@ -40,6 +42,8 @@
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 18 周](./cn/2026/18/README.md)
+    - [修复 PostgreSQL 17/18 的部分索引匹配回归：NullTest 常量化简问题深析](./cn/2026/18/partial-index-nulltest-const-simplification.md)
   - [第 17 周](./cn/2026/17/README.md)
     - [让 PostgreSQL Meson 测试失败输出可操作：从多次补丁迭代到已合并](./cn/2026/17/meson-test-failure-output.md)
     - [面向 TDE 的 post-special 页面存储：一个加密提案如何演进为页面空间抽象重构](./cn/2026/17/post-special-page-storage-tde-support.md)
