@@ -5,6 +5,7 @@ PostgreSQL Weekly posts for 2026.
 ## Weeks
 
 - [Week 18](/en/2026/18/index.html)
+  - [Stronger XID and MultiXact Wraparound Warnings: Percent Detail and a 100M Head Start](/en/2026/18/xid-wraparound-warnings-enhanced.html)
   - [Fixing Partial Index Matching Regressions in PostgreSQL 17/18: A Deep Dive into NullTest Const-Simplification](/en/2026/18/partial-index-nulltest-const-simplification.html)
 - [Week 17](/en/2026/17/index.html)
   - [Meson Test Failures in PostgreSQL: Making CI Output Actionable](/en/2026/17/meson-test-failure-output.html)
