@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 19](/en/2026/19/index.html)
+  - [Extensible Storage Manager API: Registration, Chaining, and the Long Road from SMGR Hooks](/en/2026/19/extensible-smgr-registration-chaining.html)
 - [Week 18](/en/2026/18/index.html)
   - [Stronger XID and MultiXact Wraparound Warnings: Percent Detail and a 100M Head Start](/en/2026/18/xid-wraparound-warnings-enhanced.html)
   - [Fixing Partial Index Matching Regressions in PostgreSQL 17/18: A Deep Dive into NullTest Const-Simplification](/en/2026/18/partial-index-nulltest-const-simplification.html)

@@ -3,6 +3,8 @@
 # 🇬🇧 English
 
 - [2026](./en/2026/README.md)
+  - [Week 19](./en/2026/19/README.md)
+    - [Extensible Storage Manager API: Registration, Chaining, and the Long Road from SMGR Hooks](./en/2026/19/extensible-smgr-registration-chaining.md)
   - [Week 18](./en/2026/18/README.md)
     - [Stronger XID and MultiXact Wraparound Warnings: Percent Detail and a 100M Head Start](./en/2026/18/xid-wraparound-warnings-enhanced.md)
     - [Fixing Partial Index Matching Regressions in PostgreSQL 17/18: A Deep Dive into NullTest Const-Simplification](./en/2026/18/partial-index-nulltest-const-simplification.md)
@@ -43,6 +45,8 @@
 # 🇨🇳 中文
 
 - [2026](./cn/2026/README.md)
+  - [第 19 周](./cn/2026/19/README.md)
+    - [可扩展存储管理器 API：从 Hook 到注册、链式 SMGR 与长期讨论](./cn/2026/19/extensible-smgr-registration-chaining.md)
   - [第 18 周](./cn/2026/18/README.md)
     - [增强 XID / MultiXact 回卷告警：百分比详情与 1 亿事务预警余量](./cn/2026/18/xid-wraparound-warnings-enhanced.md)
     - [修复 PostgreSQL 17/18 的部分索引匹配回归：NullTest 常量化简问题深析](./cn/2026/18/partial-index-nulltest-const-simplification.md)

@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 19 周](/cn/2026/19/index.html)
+  - [可扩展存储管理器 API：从 Hook 到注册、链式 SMGR 与长期讨论](/cn/2026/19/extensible-smgr-registration-chaining.html)
 - [第 18 周](/cn/2026/18/index.html)
   - [增强 XID / MultiXact 回卷告警：百分比详情与 1 亿事务预警余量](/cn/2026/18/xid-wraparound-warnings-enhanced.html)
   - [修复 PostgreSQL 17/18 的部分索引匹配回归：NullTest 常量化简问题深析](/cn/2026/18/partial-index-nulltest-const-simplification.html)
