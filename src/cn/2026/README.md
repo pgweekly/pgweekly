@@ -5,6 +5,7 @@
 ## 各周
 
 - [第 19 周](/cn/2026/19/index.html)
+  - [可扩展 SMGR Hook（2021–2022）：Anastasia 的提案、表空间语义与 redo 壁垒](/cn/2026/19/extensible-smgr-hooks-early-proposal.html)
   - [可扩展存储管理器 API：从 Hook 到注册、链式 SMGR 与长期讨论](/cn/2026/19/extensible-smgr-registration-chaining.html)
 - [第 18 周](/cn/2026/18/index.html)
   - [增强 XID / MultiXact 回卷告警：百分比详情与 1 亿事务预警余量](/cn/2026/18/xid-wraparound-warnings-enhanced.html)

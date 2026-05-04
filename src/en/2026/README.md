@@ -5,6 +5,7 @@ PostgreSQL Weekly posts for 2026.
 ## Weeks
 
 - [Week 19](/en/2026/19/index.html)
+  - [Extensible SMGR Hooks (2021–2022): Anastasia’s Proposal, Tablespace Semantics, and the Redo Wall](/en/2026/19/extensible-smgr-hooks-early-proposal.html)
   - [Extensible Storage Manager API: Registration, Chaining, and the Long Road from SMGR Hooks](/en/2026/19/extensible-smgr-registration-chaining.html)
 - [Week 18](/en/2026/18/index.html)
   - [Stronger XID and MultiXact Wraparound Warnings: Percent Detail and a 100M Head Start](/en/2026/18/xid-wraparound-warnings-enhanced.html)
