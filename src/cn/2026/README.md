@@ -4,6 +4,8 @@
 
 ## 各周
 
+- [第 33 周](/cn/2026/33/index.html)
+  - [Table AM 接口增强：扩展性与设计边界](/cn/2026/33/table-am-interface-enhancements-reverts.html)
 - [第 19 周](/cn/2026/19/index.html)
   - [可扩展 SMGR Hook（2021–2022）：Anastasia 的提案、表空间语义与 redo 壁垒](/cn/2026/19/extensible-smgr-hooks-early-proposal.html)
   - [可扩展存储管理器 API：从 Hook 到注册、链式 SMGR 与长期讨论](/cn/2026/19/extensible-smgr-registration-chaining.html)

@@ -4,6 +4,8 @@ PostgreSQL Weekly posts for 2026.
 
 ## Weeks
 
+- [Week 33](/en/2026/33/index.html)
+  - [Table AM Interface Enhancements: Extensibility and Design Boundaries](/en/2026/33/table-am-interface-enhancements-reverts.html)
 - [Week 19](/en/2026/19/index.html)
   - [Extensible SMGR Hooks (2021–2022): Anastasia’s Proposal, Tablespace Semantics, and the Redo Wall](/en/2026/19/extensible-smgr-hooks-early-proposal.html)
   - [Extensible Storage Manager API: Registration, Chaining, and the Long Road from SMGR Hooks](/en/2026/19/extensible-smgr-registration-chaining.html)
