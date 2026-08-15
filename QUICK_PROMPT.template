@@ -9,7 +9,7 @@ I need you to act as a PostgreSQL expert and technical writer to generate a high
 2. **Analyze the content:**
    - Read the converted Markdown file in `data/threads/YYYY-MM-DD/<thread-id>/thread.md`
    - Review the original HTML if you need more context
-   - Check the `attachments/` folder for any patch files
+   - Check the message/patchset subdirectories under `attachments/`; each directory must contain files from exactly one email and be named with that email's time and patchset version
    - If there are multiple patch versions (v1, v2, v3, etc.), use `diff` to understand what changed between versions
 
 3. **Generate TWO versions of the technical blog post (English and Chinese):**

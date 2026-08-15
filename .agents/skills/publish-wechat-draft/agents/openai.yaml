@@ -1,0 +1,4 @@
+interface:
+  display_name: "Publish WeChat Draft"
+  short_description: "Render Markdown and create a reviewable WeChat draft"
+  default_prompt: "Use $publish-wechat-draft to render this Markdown, source suitable images, and prepare a WeChat draft for my review."

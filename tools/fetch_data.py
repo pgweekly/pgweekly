@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import argparse
-import os
 import re
+from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from email.utils import parsedate_to_datetime
 import urllib.request
+import urllib.parse
 from html.parser import HTMLParser
 
 try:
@@ -19,6 +20,16 @@ except ImportError:
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 THREAD_URL = "https://www.postgresql.org/message-id/flat/{thread_id}"
 ALLOWED_ATTACHMENT_EXTS = {".patch", ".txt", ".no-cfbot"}
+
+
+@dataclass
+class AttachmentGroup:
+    """Attachments posted together in one mailing-list message."""
+
+    message_date: str = ""
+    message_id: str = ""
+    subject: str = ""
+    urls: list[str] = field(default_factory=list)
 
 
 def extract_thread_id_from_url(url: str) -> str:
@@ -101,64 +112,188 @@ def html_to_markdown(html: str) -> str:
 
 
 class AttachmentParser(HTMLParser):
-    """Parse HTML to find attachment links."""
+    """Parse attachment links together with their containing message headers."""
+
     def __init__(self):
         super().__init__()
-        self.attachments = []
+        self.groups: list[AttachmentGroup] = []
+        self._current_headers: dict[str, str] = {}
+        self._building_headers: dict[str, str] = {}
+        self._in_message_header = False
         self._in_attachment_section = False
+        self._cell_tag = ""
+        self._cell_text: list[str] = []
+        self._header_name = ""
+        self._active_group: AttachmentGroup | None = None
 
     def handle_starttag(self, tag, attrs):
+        attrs_dict = dict(attrs)
+        classes = set(attrs_dict.get("class", "").split())
+
+        if tag == "table" and "message-header" in classes:
+            self._in_message_header = True
+            self._building_headers = {}
+            return
+
+        if tag == "table" and "message-attachments" in classes:
+            self._in_attachment_section = True
+            self._active_group = AttachmentGroup(
+                message_date=self._current_headers.get("date", ""),
+                message_id=self._current_headers.get("message-id", ""),
+                subject=self._current_headers.get("subject", ""),
+            )
+            return
+
+        if self._in_message_header and tag in {"th", "td"}:
+            self._cell_tag = tag
+            self._cell_text = []
+            return
+
         if tag == "a":
-            attrs_dict = dict(attrs)
             href = attrs_dict.get("href", "")
-            # Look for attachment links (typically have /message-id/ in path)
-            if href and ("/message-id/" in href or href.startswith("/")):
-                # Check if it's an attachment file
-                for ext in ALLOWED_ATTACHMENT_EXTS:
-                    if href.endswith(ext) or f"{ext}/" in href or href.endswith(ext.replace(".", "")):
-                        # Make absolute URL if needed
-                        if href.startswith("/"):
-                            href = f"https://www.postgresql.org{href}"
-                        self.attachments.append(href)
-                        break
+            if self._in_attachment_section and self._active_group and is_attachment_url(href):
+                if href.startswith("/"):
+                    href = f"https://www.postgresql.org{href}"
+                if href not in self._active_group.urls:
+                    self._active_group.urls.append(href)
+
+    def handle_data(self, data):
+        if self._in_message_header and self._cell_tag:
+            self._cell_text.append(data)
+
+    def handle_endtag(self, tag):
+        if self._in_message_header and tag in {"th", "td"} and tag == self._cell_tag:
+            value = " ".join("".join(self._cell_text).split())
+            if tag == "th":
+                self._header_name = value.rstrip(":").lower()
+            elif self._header_name:
+                self._building_headers[self._header_name] = value
+            self._cell_tag = ""
+            self._cell_text = []
+            return
+
+        if tag == "table" and self._in_message_header:
+            self._in_message_header = False
+            if self._building_headers:
+                self._current_headers = self._building_headers
+            return
+
+        if tag == "table" and self._in_attachment_section:
+            self._in_attachment_section = False
+            if self._active_group and self._active_group.urls:
+                self.groups.append(self._active_group)
+            self._active_group = None
 
 
-def extract_attachments(html: str) -> list[str]:
-    """Extract attachment URLs from HTML."""
+def is_attachment_url(url: str) -> bool:
+    path = urllib.parse.urlsplit(url).path.lower()
+    return any(path.endswith(ext) or f"{ext}/" in path for ext in ALLOWED_ATTACHMENT_EXTS)
+
+
+def attachment_filename(url: str) -> str:
+    """Return a safe local filename for an attachment URL."""
+    filename = urllib.parse.unquote(Path(urllib.parse.urlsplit(url).path).name)
+    if not filename:
+        filename = "attachment"
+    return re.sub(r'[^\w\-_\.]', '_', filename)
+
+
+def infer_patch_version(group: AttachmentGroup) -> str:
+    """Infer one explicit version label for a message's attachment set."""
+    versions: set[int] = set()
+    for url in group.urls:
+        filename = attachment_filename(url)
+        for pattern in (r"^v(\d+)-", r"-v(\d+)(?=\.[^.]+$)"):
+            match = re.search(pattern, filename, re.IGNORECASE)
+            if match:
+                versions.add(int(match.group(1)))
+                break
+
+    if not versions:
+        match = re.search(r"\bv(\d+)\b", group.subject, re.IGNORECASE)
+        if match:
+            versions.add(int(match.group(1)))
+
+    if len(versions) == 1:
+        return f"v{next(iter(versions))}"
+    if versions:
+        return "mixed-" + "-".join(f"v{version}" for version in sorted(versions))
+    return "unversioned"
+
+
+def attachment_group_dirname(group: AttachmentGroup) -> str:
+    """Build a sortable directory name that states message time and patch version."""
+    match = re.match(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}):(\d{2}):(\d{2})", group.message_date)
+    if match:
+        date, hour, minute, second = match.groups()
+        timestamp = f"{date}_{hour}-{minute}-{second}"
+    else:
+        timestamp = "unknown-date"
+    return f"{timestamp}_{infer_patch_version(group)}"
+
+
+def extract_attachment_groups(html: str) -> list[AttachmentGroup]:
+    """Extract attachments grouped by the mailing-list message that contains them."""
     parser = AttachmentParser()
     parser.feed(html)
 
-    # Also use regex to find attachment links in the HTML
-    # Pattern: links ending with .patch, .txt, or containing attachment indicators
+    merged_groups: list[AttachmentGroup] = []
+    groups_by_message_id: dict[str, AttachmentGroup] = {}
+    for group in parser.groups:
+        if group.message_id and group.message_id in groups_by_message_id:
+            groups_by_message_id[group.message_id].urls.extend(group.urls)
+        else:
+            merged_groups.append(group)
+            if group.message_id:
+                groups_by_message_id[group.message_id] = group
+
+    seen: set[str] = set()
+    groups: list[AttachmentGroup] = []
+    for group in merged_groups:
+        unique_urls = []
+        for url in group.urls:
+            if url not in seen:
+                seen.add(url)
+                unique_urls.append(url)
+        group.urls = unique_urls
+        if group.urls:
+            groups.append(group)
+
+    # Detect unexpected page markup instead of silently flattening unrelated emails.
     pattern = r'href="([^"]+\.(?:patch|txt|no-cfbot)[^"]*)"'
-    regex_matches = re.findall(pattern, html, re.IGNORECASE)
-
-    all_attachments = parser.attachments + regex_matches
-
-    # Deduplicate and normalize URLs
-    unique_attachments = []
-    seen = set()
-    for url in all_attachments:
+    unmatched = []
+    for url in re.findall(pattern, html, re.IGNORECASE):
         if url.startswith("/"):
             url = f"https://www.postgresql.org{url}"
         if url not in seen:
             seen.add(url)
-            unique_attachments.append(url)
+            unmatched.append(url)
+    if unmatched:
+        raise RuntimeError(
+            f"Could not associate {len(unmatched)} attachment(s) with a source email; "
+            "refusing to flatten them"
+        )
 
-    return unique_attachments
+    dirnames = [attachment_group_dirname(group) for group in groups]
+    if len(dirnames) != len(set(dirnames)):
+        raise RuntimeError(
+            "Multiple source emails resolve to the same attachment directory name; "
+            "refusing to mix them"
+        )
+
+    return groups
+
+
+def extract_attachments(html: str) -> list[str]:
+    """Extract attachment URLs from HTML."""
+    return [url for group in extract_attachment_groups(html) for url in group.urls]
 
 
 def download_attachment(url: str, output_dir: Path) -> Path | None:
     """Download an attachment file."""
     try:
-        # Extract filename from URL
-        filename = url.split("/")[-1]
-        if not filename or filename == "":
-            filename = "attachment"
-
-        # Sanitize filename
-        filename = re.sub(r'[^\w\-_\.]', '_', filename)
-
+        filename = attachment_filename(url)
+        output_dir.mkdir(parents=True, exist_ok=True)
         output_path = output_dir / filename
 
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
@@ -190,31 +325,99 @@ def sanitize_thread_id(thread_id: str) -> str:
     return thread_id
 
 
-def download_missing_attachments(thread_dir: Path) -> list[str]:
+def organize_existing_attachments(thread_dir: Path, groups: list[AttachmentGroup]) -> list[str]:
+    """Move legacy flat attachment files into their message/patchset directories."""
+    attachments_dir = thread_dir / "attachments"
+    moved: list[str] = []
+    if not attachments_dir.is_dir():
+        return moved
+
+    targets_by_name: dict[str, list[Path]] = {}
+    for group in groups:
+        group_dir = attachments_dir / attachment_group_dirname(group)
+        for url in group.urls:
+            targets_by_name.setdefault(attachment_filename(url), []).append(group_dir)
+
+    for source in attachments_dir.iterdir():
+        if not source.is_file():
+            continue
+        target_dirs = targets_by_name.get(source.name, [])
+        if len(target_dirs) != 1:
+            print(f"  Warning: Cannot safely place legacy attachment: {source.name}")
+            continue
+        target_dir = target_dirs[0]
+        target_dir.mkdir(parents=True, exist_ok=True)
+        target = target_dir / source.name
+        if target.exists():
+            print(f"  Warning: Target already exists, leaving legacy file: {source.name}")
+            continue
+        source.rename(target)
+        moved.append(str(target.relative_to(thread_dir)))
+    return moved
+
+
+def write_attachment_index(
+    thread_dir: Path,
+    title: str,
+    thread_id: str,
+    groups: list[AttachmentGroup],
+) -> None:
+    """Write a message-grouped index, including explicit missing-file markers."""
+    lines = [
+        f"# Attachments for: {title}",
+        f"# Thread ID: {thread_id}",
+        f"# Updated: {datetime.now().isoformat()}",
+        "",
+    ]
+    for group in groups:
+        dirname = attachment_group_dirname(group)
+        lines.extend([
+            f"## {dirname}",
+            f"# Message date: {group.message_date or 'unknown'}",
+            f"# Message-ID: {group.message_id or 'unknown'}",
+            f"# Version: {infer_patch_version(group)}",
+        ])
+        for url in group.urls:
+            relative_path = Path("attachments") / dirname / attachment_filename(url)
+            marker = "" if (thread_dir / relative_path).exists() else "MISSING: "
+            lines.append(f"- {marker}{relative_path}")
+        lines.append("")
+
+    (thread_dir / "attachments.txt").write_text("\n".join(lines), encoding="utf-8")
+
+
+def download_missing_attachments(
+    thread_dir: Path,
+    groups: list[AttachmentGroup] | None = None,
+) -> list[str]:
     """Read thread.html in thread_dir, extract attachment URLs, download any not already in attachments/."""
     html_path = thread_dir / "thread.html"
     if not html_path.exists():
         print(f"  ✗ No thread.html in {thread_dir}")
         return []
     html = html_path.read_text(encoding="utf-8", errors="ignore")
-    attachments = extract_attachments(html)
+    if groups is None:
+        groups = extract_attachment_groups(html)
     attachments_dir = thread_dir / "attachments"
     attachments_dir.mkdir(exist_ok=True)
-    existing = set(attachments_dir.iterdir()) if attachments_dir.exists() else set()
-    existing_names = {p.name for p in existing}
+    organize_existing_attachments(thread_dir, groups)
     downloaded = []
-    for i, url in enumerate(attachments, 1):
-        filename = url.split("/")[-1].split("?")[0]
-        if not filename:
-            continue
-        if filename in existing_names:
-            continue
-        print(f"  [{i}] Downloading: {filename[:60]}")
-        result = download_attachment(url, attachments_dir)
-        if result:
-            downloaded.append(result.name)
-            existing_names.add(result.name)
-            print(f"      ✓ Saved: {result.name}")
+    attachment_count = sum(len(group.urls) for group in groups)
+    current = 0
+    for group in groups:
+        group_dir = attachments_dir / attachment_group_dirname(group)
+        for url in group.urls:
+            current += 1
+            filename = attachment_filename(url)
+            output_path = group_dir / filename
+            if output_path.exists():
+                continue
+            print(f"  [{current}/{attachment_count}] Downloading: {filename[:60]}")
+            result = download_attachment(url, group_dir)
+            if result:
+                relative_path = str(result.relative_to(thread_dir))
+                downloaded.append(relative_path)
+                print(f"      ✓ Saved: {relative_path}")
     return downloaded
 
 
@@ -234,15 +437,25 @@ def main() -> None:
         if not thread_dir.is_dir():
             print(f"✗ Not a directory: {thread_dir}")
             return
+        html_path = thread_dir / "thread.html"
+        if not html_path.is_file():
+            print(f"✗ No thread.html in {thread_dir}")
+            return
+        html = html_path.read_text(encoding="utf-8", errors="ignore")
+        try:
+            attachment_groups = extract_attachment_groups(html)
+        except RuntimeError as e:
+            print(f"✗ Attachment grouping failed: {e}")
+            return
         print(f"📧 Downloading missing attachments for: {thread_dir.name}")
-        downloaded = download_missing_attachments(thread_dir)
+        downloaded = download_missing_attachments(thread_dir, attachment_groups)
+        write_attachment_index(
+            thread_dir,
+            extract_title(html),
+            thread_dir.name,
+            attachment_groups,
+        )
         print(f"\n✅ Done. Downloaded {len(downloaded)} missing attachment(s).")
-        if downloaded:
-            index_path = thread_dir / "attachments.txt"
-            existing_index = index_path.read_text(encoding="utf-8", errors="ignore") if index_path.exists() else ""
-            new_lines = "\n".join(f"- {name}" for name in downloaded)
-            if new_lines and "- " + downloaded[0] not in existing_index:
-                index_path.write_text(existing_index.rstrip() + "\n" + new_lines + "\n", encoding="utf-8")
         return
 
     if not args.thread_id and not args.input:
@@ -298,7 +511,12 @@ def main() -> None:
 
     # Step 5: Extract and download attachments
     print("\n[4/4] Checking for attachments...")
-    attachments = extract_attachments(html)
+    try:
+        attachment_groups = extract_attachment_groups(html)
+    except RuntimeError as e:
+        print(f"  ✗ Attachment grouping failed: {e}")
+        return
+    attachments = [url for group in attachment_groups for url in group.urls]
 
     if attachments:
         print(f"  Found {len(attachments)} attachment(s)")
@@ -306,25 +524,21 @@ def main() -> None:
         attachments_dir.mkdir(exist_ok=True)
 
         downloaded = []
-        for i, url in enumerate(attachments, 1):
-            print(f"  [{i}/{len(attachments)}] Downloading: {url.split('/')[-1][:50]}")
-            result = download_attachment(url, attachments_dir)
-            if result:
-                downloaded.append(result.name)
-                print(f"    ✓ Saved: {result.name}")
+        current = 0
+        for group in attachment_groups:
+            group_dir = attachments_dir / attachment_group_dirname(group)
+            for url in group.urls:
+                current += 1
+                filename = attachment_filename(url)
+                print(f"  [{current}/{len(attachments)}] Downloading: {filename[:50]}")
+                result = download_attachment(url, group_dir)
+                if result:
+                    relative_path = str(result.relative_to(thread_dir))
+                    downloaded.append(relative_path)
+                    print(f"    ✓ Saved: {relative_path}")
 
-        if downloaded:
-            # Create attachment index
-            index_path = thread_dir / "attachments.txt"
-            index_content = "\n".join([
-                f"# Attachments for: {title}",
-                f"# Thread ID: {thread_id}",
-                f"# Downloaded: {datetime.now().isoformat()}",
-                "",
-                *[f"- {name}" for name in downloaded]
-            ])
-            index_path.write_text(index_content, encoding="utf-8")
-            print(f"  ✓ Attachment index: {index_path.name}")
+        write_attachment_index(thread_dir, title, thread_id, attachment_groups)
+        print("  ✓ Attachment index: attachments.txt")
     else:
         print("  No attachments found")
 

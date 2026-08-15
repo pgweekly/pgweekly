@@ -21,13 +21,14 @@ I need you to act as a PostgreSQL expert and technical writer to generate a high
 
 2. **Verify all patch set versions are downloaded:**
    - Identify all patch versions referenced in the thread (v1, v2, v3…; or 0001-, 0002- in patch series)
-   - Ensure every referenced version exists in `attachments/`
+   - Ensure every referenced version exists under a message-grouped `attachments/<source-email-time>_<version>/` directory
+   - Ensure each directory contains attachments from exactly one email; use `attachments.txt` to verify its timestamp, Message-ID, version, and files
    - If any are missing, run `python3 tools/fetch_data.py --thread-dir "data/threads/YYYY-MM-DD/<thread-id>"` to retry; do not proceed until all are present
 
 3. **Analyze the content:**
    - Read the converted Markdown file in `data/threads/YYYY-MM-DD/<thread-id>/thread.md`
    - Review the original HTML if you need more context
-   - Check the `attachments/` folder for any patch files
+   - Check the message/patchset subdirectories under `attachments/` for patch files
    - If there are multiple patch versions (v1, v2, v3, etc.), use `diff` to understand what changed between versions
 
 4. **Generate a technical blog post with:**
@@ -36,7 +37,7 @@ I need you to act as a PostgreSQL expert and technical writer to generate a high
    - **Technical Analysis:**
      - Key discussion points and decisions
      - Code examples or patch highlights (if relevant)
-     - **SQL examples:** When the topic can be shown with SQL (functions, DDL, queries, `EXPLAIN`, patterns from regression tests), add a subsection with copy-pasteable `sql` blocks in **both** English and Chinese; include version/caveats if needed. Skip only when SQL would be misleading or not applicable—see `SQL examples convention` in `.cursor/skills/pgweekly-blog-generation/SKILL.md`.
+     - **SQL examples:** When the topic can be shown with SQL (functions, DDL, queries, `EXPLAIN`, patterns from regression tests), add a subsection with copy-pasteable `sql` blocks in **both** English and Chinese; include version/caveats if needed. Skip only when SQL would be misleading or not applicable—see `SQL examples convention` in `.agents/skills/pgweekly-blog-generation/SKILL.md`.
      - Evolution of the solution (compare patch versions if multiple exist)
    - **Community Insights:**
      - Important reviewer feedback
@@ -88,13 +89,13 @@ Run: `python3 tools/fetch_data.py --thread-id "{THREAD_ID_OR_URL}"`
 
 **Step 2: Verify Patch Versions**
 - Identify all patch versions referenced in the thread (v1, v2, v3…; 0001-, 0002-…)
-- Ensure every referenced version exists in `attachments/`; if any missing, run `python3 tools/fetch_data.py --thread-dir "data/threads/YYYY-MM-DD/<thread-id>"` and do not proceed until all are present
+- Ensure every referenced version exists under `attachments/<source-email-time>_<version>/`, with one source email per directory; if any are missing or still flattened, run `python3 tools/fetch_data.py --thread-dir "data/threads/YYYY-MM-DD/<thread-id>"` and do not proceed until all are present
 
 **Step 3: Content Analysis**
 Review:
 - Markdown content: `data/threads/*/thread.md`
-- Patches in: `data/threads/*/attachments/`
-- For multiple patch versions, run: `diff -u v1-*.patch v2-*.patch` to see evolution
+- Patches in: `data/threads/*/*/attachments/<source-email-time>_<version>/`
+- For multiple patch versions, compare corresponding files from their versioned subdirectories with `diff -u`
 
 **Step 4: Blog Structure**
 

@@ -6,7 +6,7 @@ This folder provides tools to download and process PostgreSQL mailing list threa
 
 - Fetch thread HTML from `postgresql.org`
 - Convert HTML to Markdown (uses `html2text` if available)
-- Download attachments (.patch, .txt, .no-cfbot files)
+- Download attachments (.patch, .txt, .no-cfbot files), grouped by source email and patchset version
 - Organize content by thread-id and date
 - **Cursor Agent integration** for automated blog generation
 
@@ -78,12 +78,19 @@ data/threads/
           ├── thread.html          # Original HTML
           ├── thread.md            # Converted Markdown
           ├── metadata.txt         # Thread metadata
-          ├── attachments.txt      # List of attachments
-          └── attachments/         # Downloaded attachments
-              ├── v1-patch.patch
-              ├── v2-patch.patch
-              └── ...
+          ├── attachments.txt      # Message-grouped attachment index
+          └── attachments/         # One directory per source email/patchset
+              ├── 2026-01-17_09-15-30_v1/
+              │   ├── 0001-first-change-v1.patch
+              │   └── 0002-second-change-v1.patch
+              └── 2026-01-18_14-05-22_v2/
+                  ├── 0001-first-change-v2.patch
+                  └── 0002-second-change-v2.patch
 ```
+
+Each attachment directory uses the source email's displayed timestamp and the
+version inferred from that email's filenames or subject. Attachments from one
+email stay together. A message without a version marker uses `unversioned`.
 
 ## Dependencies
 

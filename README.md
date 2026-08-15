@@ -39,7 +39,7 @@ This command will:
 
 ### Step 3: Generate Blog with Cursor Agent
 
-This project includes an **agent skill** (`.cursor/skills/pgweekly-blog-generation/`) so Cursor automatically knows how to generate blogs. Use any of these:
+This project includes an **agent skill** (`.agents/skills/pgweekly-blog-generation/`) so compatible coding agents automatically know how to generate blogs. Use any of these:
 
 **Option A: Simple (Skill-aware)**
 
@@ -102,7 +102,8 @@ pgweekly/
 │               ├── thread.html        # Original HTML
 │               ├── thread.md          # Converted Markdown
 │               ├── metadata.txt       # Thread info
-│               └── attachments/       # Patches and files
+│               ├── attachments.txt    # Message-grouped attachment index
+│               └── attachments/       # Patches grouped by source email/time and version
 └── tools/                             # Automation scripts
     ├── README.md                      # Tools documentation
     └── fetch_data.py                  # Thread downloader
@@ -133,8 +134,8 @@ python3 tools/fetch_data.py --thread-id "..." --output-dir "my-threads"
 - `data/threads/{date}/{thread-id}/thread.html` - Original HTML
 - `data/threads/{date}/{thread-id}/thread.md` - Converted Markdown
 - `data/threads/{date}/{thread-id}/metadata.txt` - Thread metadata
-- `data/threads/{date}/{thread-id}/attachments/` - Downloaded patches/files
-- `data/threads/{date}/{thread-id}/attachments.txt` - Attachment list
+- `data/threads/{date}/{thread-id}/attachments/{message-time}_{version}/` - Downloaded patches/files from one source email
+- `data/threads/{date}/{thread-id}/attachments.txt` - Message-grouped attachment index
 
 See [tools/README.md](tools/README.md) for more details.
 

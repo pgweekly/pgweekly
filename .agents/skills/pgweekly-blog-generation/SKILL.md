@@ -21,12 +21,21 @@ Generates English and Chinese technical blog posts from PostgreSQL mailing list 
    - `thread.html` - Original HTML
    - `thread.md` - Converted Markdown
    - `metadata.txt` - Thread info
-   - `attachments/` - **Downloaded patches** (e.g. `.patch` files from the mailing list)
-   - `attachments.txt` - List of downloaded attachment filenames
+   - `attachments/<message-time>_<version>/` - **Downloaded patches grouped by source email and patchset**
+   - `attachments.txt` - Message-grouped attachment index with source date, Message-ID, version, and relative paths
+
+   **Keep the attachment layout strict:**
+   - Put all attachments from one email in one directory, and put no attachments from another email in that directory. Treat the email as the grouping boundary even when it has only one attachment.
+   - Name each directory `<YYYY-MM-DD>_<HH-MM-SS>_<version>`, using the source email's displayed timestamp and an explicit version label, for example `2024-03-29_09-33-30_v8/`.
+   - Infer `vN` from that email's attachment filenames first and its subject second. Use `unversioned` when neither contains a version. Use `mixed-v1-v2` if one email genuinely contains multiple version labels.
+   - Never flatten attachments from the whole thread into one directory and never group files by patch number alone.
+   - Stop and report an attachment-grouping error if the source email or a unique time/version directory cannot be determined; do not guess or mix files.
+   - Preserve the server-provided attachment filenames inside the group directory.
 
 3. **Verify** all patch set versions are downloaded — **MANDATORY GATE; do not skip**:
    - Read `thread.md` and `thread.html` to identify **all** patch versions referenced (v1, v2, v3…; or `0001-`, `0002-` in patch series)
-   - Run `ls data/threads/YYYY-MM-DD/<thread-id>/attachments/` and compare with the list of referenced versions
+   - Read `attachments.txt`, then run `find data/threads/YYYY-MM-DD/<thread-id>/attachments -type f` and compare the message-grouped files with every referenced patchset
+   - Confirm that every patchset directory name contains its source email timestamp and version, and that no directory mixes attachments from different emails
    - **If any referenced version is missing:**
      - Run `python3 tools/fetch_data.py --thread-dir "data/threads/YYYY-MM-DD/<thread-id>"` to retry
      - Re-verify; if still missing, **STOP** — report missing versions to the user and do not write the blog
@@ -128,7 +137,7 @@ All thread data, including **downloaded patches**, is stored under `data/threads
 
 - **Base path:** `data/threads/` (configurable via `--output-dir`; default is `data/threads`).
 - **Per-thread directory:** `data/threads/YYYY-MM-DD/<sanitized-thread-id>/`, where `YYYY-MM-DD` is the **fetch date** (the day the script was run).
-- **Patches:** The fetch script downloads every attachment (e.g. `.patch`, `.txt`) from the thread into `data/threads/YYYY-MM-DD/<sanitized-thread-id>/attachments/`. Use these files when analyzing patch evolution or citing code changes.
+- **Patches:** The fetch script downloads every attachment (e.g. `.patch`, `.txt`) into `attachments/<source-email-time>_<version>/`. Each subdirectory is exactly one source email/patchset; use `attachments.txt` to trace its date, Message-ID, version, and files.
 
 Do not generate a blog from a thread without first running `fetch_data.py` so that the thread and its patches are present under `data/threads/`.
 
