@@ -8,7 +8,7 @@ This folder provides tools to download and process PostgreSQL mailing list threa
 - Convert HTML to Markdown (uses `html2text` if available)
 - Download attachments (.patch, .txt, .no-cfbot files), grouped by source email and patchset version
 - Organize content by thread-id and date
-- **Cursor Agent integration** for automated blog generation
+- **Agent Skills integration** for automated blog generation
 
 ## Quick Start
 
@@ -28,7 +28,7 @@ This will:
 3. Download all attachments (.patch, .txt, .no-cfbot)
 4. Save everything to `data/threads/<date>/<thread-id>/`
 
-### 🤖 Step 2: Generate Blog with Cursor Agent
+### 🤖 Step 2: Generate Blog with an Agent Skill
 
 **⚡ Quick Method:**
 1. **First time setup:** Copy the template
@@ -39,7 +39,7 @@ This will:
 
 2. Open `QUICK_PROMPT.txt` in the project root
 3. Replace `PASTE_YOUR_THREAD_ID_HERE` with your thread ID/URL (in 2 places)
-4. Copy the entire prompt and paste it into Cursor Agent
+4. Copy the entire prompt and paste it into your coding agent's chat
 
 **📚 Detailed Method:**
 See `BLOG_GENERATION_PROMPT.md` for:
@@ -61,7 +61,7 @@ See `BLOG_GENERATION_PROMPT.md` for:
 
 ### 💬 Simple Natural Language
 
-Or just tell Cursor Agent:
+Or ask an Agent Skills-compatible coding agent:
 
 ```
 "Generate a blog from this PostgreSQL thread: [paste thread ID]"
@@ -126,5 +126,5 @@ python3 tools/fetch_data.py --thread-id <id> --output-dir "my-threads"
 
 1. **Download threads** using `fetch_data.py`
 2. **Use prompt templates** in `QUICK_PROMPT.txt` or `BLOG_GENERATION_PROMPT.md`
-3. **Let Cursor Agent generate** high-quality technical blogs
+3. **Let a compatible coding agent generate** high-quality technical blogs
 4. **Review and publish** to your weekly digest

@@ -7,7 +7,7 @@ book
 # Personal prompt file (copy from QUICK_PROMPT.template)
 QUICK_PROMPT.txt
 
-# Repository skills shared by Codex, Cursor, and other Agent Skills clients
+# Repository skills shared by Agent Skills-compatible clients
 !/.agents/
 !/.agents/skills/
 !/.agents/skills/**

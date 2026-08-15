@@ -1,9 +1,9 @@
 # PostgreSQL Weekly - A Hacker's Digest
 
-> A technical blog aggregating and analyzing discussions from [pgsql-hackers](https://www.postgresql.org/list/pgsql-hackers/), powered by Cursor Agent.
+> A technical blog aggregating and analyzing discussions from [pgsql-hackers](https://www.postgresql.org/list/pgsql-hackers/), powered by Agent Skills-compatible coding agents.
 
 [![mdBook](https://img.shields.io/badge/built%20with-mdBook-blue)](https://rust-lang.github.io/mdBook/)
-[![Cursor AI](https://img.shields.io/badge/powered%20by-Cursor%20AI-purple)](https://cursor.sh/)
+[![Agent Skills](https://img.shields.io/badge/powered%20by-Agent%20Skills-purple)](https://agentskills.io/)
 
 ## 🎯 Project Overview
 
@@ -11,7 +11,7 @@ This project automates the process of:
 1. **Fetching** PostgreSQL mailing list thread discussions
 2. **Converting** HTML content to Markdown format
 3. **Downloading** attachments (patches, documentation)
-4. **Generating** high-quality technical blog posts using AI (Cursor Agent)
+4. **Generating** high-quality technical blog posts with Agent Skills-compatible coding agents
 5. **Publishing** organized weekly digests using mdBook
 
 ## 📝 Workflow: From Thread to Blog
@@ -37,7 +37,7 @@ This command will:
 - ✅ Download attachments (.patch, .txt, .no-cfbot files)
 - ✅ Save everything to `data/threads/<date>/<thread-id>/`
 
-### Step 3: Generate Blog with Cursor Agent
+### Step 3: Generate Blog with an Agent Skill
 
 This project includes an **agent skill** (`.agents/skills/pgweekly-blog-generation/`) so compatible coding agents automatically know how to generate blogs. Use any of these:
 
@@ -53,7 +53,7 @@ The agent will fetch, analyze, and generate both English and Chinese posts autom
 
 1. Open `QUICK_PROMPT.txt`
 2. Replace both instances of `PASTE_YOUR_THREAD_ID_HERE` with your thread ID/URL
-3. Copy the entire content and paste into Cursor Agent chat
+3. Copy the entire content and paste it into your coding agent's chat
 
 **Option C: Advanced Control**
 
@@ -80,6 +80,10 @@ mdbook serve  # Preview locally
 ```
 pgweekly/
 ├── README.md                          # This file
+├── .agents/
+│   └── skills/                        # Shared Agent Skills
+│       ├── pgweekly-blog-generation/  # Thread-to-blog workflow
+│       └── publish-wechat-draft/      # Markdown-to-WeChat draft workflow
 ├── QUICK_PROMPT.template              # Template for quick blog generation
 ├── QUICK_PROMPT.txt                   # Your personal prompt (gitignored)
 ├── BLOG_GENERATION_PROMPT.md          # Detailed prompt templates and docs
@@ -139,14 +143,12 @@ python3 tools/fetch_data.py --thread-id "..." --output-dir "my-threads"
 
 See [tools/README.md](tools/README.md) for more details.
 
-## 🤖 Using Cursor Agent
+## 🤖 Agent Skills
 
-Cursor Agent acts as a PostgreSQL expert to:
-- Analyze mailing list discussions
-- Compare patch versions using diff
-- Identify key technical points
-- Generate well-structured blog posts
-- Organize content by date
+Compatible coding agents discover the repository's reusable workflows under `.agents/skills/`:
+
+- **`pgweekly-blog-generation`** analyzes mailing list discussions, compares patch versions, generates English and Chinese posts, and updates navigation.
+- **`publish-wechat-draft`** renders Markdown as WeChat-compatible HTML and creates a reviewable Official Account draft after explicit approval; it never publishes the article.
 
 ### Prompt Templates
 
@@ -183,7 +185,7 @@ python3 tools/fetch_data.py --thread-id "YOUR_URL_HERE"
 
 # 3. Open QUICK_PROMPT.txt, replace the thread ID (2 places)
 
-# 4. Copy the entire prompt and paste to Cursor Agent
+# 4. Ask an Agent Skills-compatible coding agent to generate the blog
 
 # 5. Wait for the agent to:
 #    - Fetch data

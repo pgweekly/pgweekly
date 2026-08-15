@@ -1,6 +1,6 @@
 ---
 name: publish-wechat-draft
-description: Render Markdown articles into WeChat-compatible inline-styled HTML, source optional Unsplash images with attribution, prepare a local preview, upload article assets, and create a WeChat Official Account draft for human review. Use when Codex is asked to turn a Markdown file into a WeChat article, preview WeChat formatting, select a cover image, upload content to a WeChat draft box, or prepare—but never mass-publish—a WeChat Official Account article.
+description: Render Markdown articles into WeChat-compatible inline-styled HTML, source optional Unsplash images with attribution, prepare a local preview, upload article assets, and create a WeChat Official Account draft for human review. Use when asked to turn a Markdown file into a WeChat article, preview WeChat formatting, select a cover image, upload content to a WeChat draft box, or prepare—but never mass-publish—a WeChat Official Account article.
 ---
 
 # Publish WeChat Draft
